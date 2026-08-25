@@ -1,89 +1,95 @@
-Sistema de Estoque e Vendas em Java
+# Sistema de Estoque e Vendas em Java
 
 Projeto desenvolvido para praticar lógica de programação e programação orientada a objetos com Java.
 
 O sistema funciona pelo terminal e permite cadastrar produtos, consultar informações, controlar o estoque, registrar vendas e acompanhar o faturamento.
 
-Funcionalidades
+## Funcionalidades
 
-Cadastro e consulta de produtos
+- Cadastro e consulta de produtos
 
-Controle e atualização de estoque
+- Controle e atualização de estoque
 
-Registro de vendas
+- Registro de vendas
 
-Busca de produtos
+- Busca de produtos
 
-Acompanhamento do faturamento
+- Acompanhamento do faturamento
 
-Validação de dados informados pelo usuário
+- Validação de dados informados pelo usuário
 
-Tipos específicos de produtos, como alimentos e eletrônicos
+- Tipos específicos de produtos, como alimentos e eletrônicos
 
-Conceitos praticados
+## Conceitos praticados
 
-Classes e objetos
+- Classes e objetos
 
-Encapsulamento
+- Encapsulamento
 
-Herança
+- Herança
 
-Sobrescrita de métodos
+- Sobrescrita de métodos
 
-Listas
+- Listas
 
-Métodos
+- Métodos
 
-Estruturas condicionais e de repetição
+- Estruturas condicionais e de repetição
 
-Menus interativos no terminal
+- Menus interativos no terminal
 
-Tecnologias e ferramentas
+## Tecnologias e ferramentas
 
-Java
+- Java
 
-IntelliJ IDEA
+- IntelliJ IDEA
 
-Git e GitHub
+- Git e GitHub
 
-Estrutura do projeto
+## Estrutura do projeto
 
-src/
-└── minisistema/
-├── Alimento.java
-├── Eletronico.java
-├── Main.java
-├── Produto.java
-└── SistemaProdutos.java
 
-Como executar
+```text
+sistema-estoque-java/
+|-- src/
+|   `-- minisistema/
+|       |-- Alimento.java
+|       |-- Eletronico.java
+|       |-- Main.java
+|       |-- Produto.java
+|       `-- SistemaProdutos.java
+|-- .gitignore
+`-- README.md
+```
 
-Clone este repositório:
+## Como executar
 
-git clone https://github.com/BrunoFigueiredo009/sistema-estoque-java.git
+1. Clone este repositório:
 
-Abra a pasta do projeto no IntelliJ IDEA.
+    git clone https://github.com/BrunoFigueiredo009/sistema-estoque-java.git
 
-Aguarde o IntelliJ reconhecer o JDK configurado.
+2. Abra a pasta do projeto no IntelliJ IDEA.
 
-Execute a classe Main, localizada em src/minisistema.
+3. Aguarde o IntelliJ reconhecer o JDK configurado.
 
-Utilize as opções exibidas no terminal.
+4. Execute a classe Main, localizada em src/minisistema.
 
-Status
+5. Utilize as opções exibidas no terminal.
+
+## Status
 
 Em desenvolvimento.
 
-Próximos passos
+## Próximos passos
 
-Melhorar a organização e as validações do sistema
+- Melhorar a organização e as validações do sistema
 
-Ampliar as funcionalidades de estoque e vendas
+- Ampliar as funcionalidades de estoque e vendas
 
-Adicionar persistência de dados com MySQL
+- Adicionar persistência de dados com MySQL
 
-Evoluir o projeto conforme o aprendizado em Java
+- Evoluir o projeto conforme o aprendizado em Java
 
-Autor
+## Autor
 
-Desenvolvido por Bruno Figueiredo.
+Desenvolvido por [Bruno Figueiredo](https://github.com/BrunoFigueiredo009).

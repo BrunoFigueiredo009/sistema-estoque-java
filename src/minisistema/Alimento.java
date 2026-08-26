@@ -1,9 +1,13 @@
 package minisistema;
 
-public class Alimento extends Produto {
+public class Alimento extends Produto implements Vendavel {
+
+    //extends Produto -->  é um Produto
+
+    // implements Vendavel --> é Vendável / pode ser vendido
+
+
     private String validade;
-
-
 
     public Alimento(String nome, double preco, int estoque, String validade){
         super(nome,preco,estoque);
@@ -19,8 +23,23 @@ public class Alimento extends Produto {
         return super.toString() + (" -- Validade: "+validade);
 
         //super.toString() → pega nome, preço e estoque de Produto
-        //Validae é especifico do Alimento
+        //Validade é especifico do Alimento
 
     }
 
+    @Override
+    public String getTipo(){
+        return "Alimento";
+    }
+
+    @Override // Também pode apenas modificar, Devido ao contrato vendavel
+    public boolean vender(int quantidade){
+
+        return realizaVenda(quantidade);
+
+    }
 }
+
+
+
+

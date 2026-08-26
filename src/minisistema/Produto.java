@@ -61,5 +61,9 @@ public abstract class Produto {
         public String toString(){
             return ("Nome: "+nome+" -- Valor: "+preco+" -- Estoque: "+estoque);
         }
+
+        public abstract String getTipo(); //Obriga cada filho ter um getTipo()
     }
+
+
 

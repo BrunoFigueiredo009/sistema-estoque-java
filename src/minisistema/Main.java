@@ -60,7 +60,9 @@ public class Main {
                         sistema.cadastraProduto(p);
                         System.out.println("Alimento cadastrado com sucesso");
 
-                    }else if(menuOp == 2){
+                    }
+
+                    else if(menuOp == 2){
                         scanner.nextLine();
                         System.out.println("Entre com o nome do Eletronico");
                         nome = scanner.nextLine();
@@ -109,7 +111,7 @@ public class Main {
                 System.out.println("Digite a quantidade da venda");
                 int quantVendido = scanner.nextInt();
 
-                boolean vendeu = sistema.venderPRoduto(busca,quantVendido);
+                boolean vendeu = sistema.venderProduto(busca,quantVendido);
 
                 if(vendeu){
                     System.out.println("Produto vendido");
@@ -151,7 +153,7 @@ public class Main {
             }
 
 
-        }
+        }//Editar Produto
 
         else if(menuOp == 6){
             System.out.println("Qual produto deseja atualizar?");
@@ -184,7 +186,7 @@ public class Main {
             }
 
 
-        }
+        } //Remover
 
     }while(menuOp != 0);}}
 

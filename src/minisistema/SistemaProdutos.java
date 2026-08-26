@@ -47,10 +47,6 @@ import java.util.Scanner;
          return produto.isEmpty();
      }
 
-     public int tamanhoLista() {
-         return produto.size();
-     }
-
      public Produto buscarProduto(String nome) {
          for (int i = 0; i < produto.size(); i++) {
              if (produto.get(i).getNome().equals(nome)) {
@@ -92,16 +88,16 @@ import java.util.Scanner;
          return soma;
      }
 
-     public boolean venderPRoduto(String nome, int quantidade) {
+     public boolean venderProduto(String nome, int quantidade) {
          Produto encontrado = buscarProduto(nome);
 
-         if (encontrado != null) {
+             if (encontrado instanceof Vendavel v){
+                 //Ja confirmei que a encontrado é vendavel. Agora quero trata-la como vendavel
 
-             return encontrado.realizaVenda(quantidade);
+                 return v.vender(quantidade);
+             }
 
-         }
          return false;
-
 
      }
 
@@ -112,4 +108,6 @@ import java.util.Scanner;
 
          }return false;
      }
+
+
  }

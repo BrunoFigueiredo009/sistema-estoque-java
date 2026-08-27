@@ -1,5 +1,7 @@
 package minisistema;
 
+import java.time.LocalDate;
+
 public class Alimento extends Produto implements Vendavel {
 
     //extends Produto -->  é um Produto
@@ -7,14 +9,14 @@ public class Alimento extends Produto implements Vendavel {
     // implements Vendavel --> é Vendável / pode ser vendido
 
 
-    private String validade;
+    private LocalDate validade;
 
-    public Alimento(String nome, double preco, int estoque, String validade){
+    public Alimento(String nome, double preco, int estoque, LocalDate validade){
         super(nome,preco,estoque);
         this.validade = validade;
     }
 
-    public String getValidade() {
+    public LocalDate getValidade() {
         return validade;
     }
 

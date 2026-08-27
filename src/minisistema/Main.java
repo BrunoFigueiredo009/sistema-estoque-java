@@ -1,5 +1,7 @@
 package minisistema;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
@@ -19,12 +21,13 @@ public class Main {
     static void subMenu(){
         System.out.println("1 - Cadastrar Alimento");
         System.out.println("2 - Cadastrar Eletrônico");
-        System.out.println("0 - Sair");
+        System.out.println("0 - Voltar");
     }
 
     public static void main(String[] args){
     SistemaProdutos sistema = new SistemaProdutos();
     Scanner scanner = new Scanner(System.in);
+
 
     int menuOp;
 
@@ -33,57 +36,72 @@ public class Main {
         menuOp = scanner.nextInt();
         menuOp = sistema.verificaNumeroMenu(menuOp, scanner);
         String busca;
+        int escolhasubmenu;
+
         if (menuOp == 1) {
+
                 do{
-                    subMenu();
-                    menuOp = scanner.nextInt();
                     String nome;
                     double valor;
                     int estoque;
 
-                    if(menuOp == 1){
-                        scanner.nextLine();
-                        System.out.println("Entre com o nome do alimento");
-                        nome = scanner.nextLine();
 
-                        System.out.println("Entre com o preco");
-                        valor = scanner.nextDouble();
+                    subMenu();
+                    escolhasubmenu = scanner.nextInt();
 
-                        System.out.println("Entre com o estoque");
-                        estoque = scanner.nextInt();
-                        scanner.nextLine();
+                    boolean verificaSubMenu = verificaSubMenu = sistema.verificaSubMenu(escolhasubmenu);
 
-                        System.out.println("Entre com a validade");
-                        String validade = scanner.nextLine();
-
-                        Alimento p = new Alimento(nome,valor,estoque,validade);
-                        sistema.cadastraProduto(p);
-                        System.out.println("Alimento cadastrado com sucesso");
-
+                    if(!verificaSubMenu){
+                        System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
                     }
-
-                    else if(menuOp == 2){
-                        scanner.nextLine();
-                        System.out.println("Entre com o nome do Eletronico");
-                        nome = scanner.nextLine();
-
-                        System.out.println("Entre com o preco");
-                        valor = scanner.nextInt();
-
-                        System.out.println("Entre com o estoque");
-                        estoque = scanner.nextInt();
-
-                        System.out.println("Entre com a garantia");
-                        scanner.nextLine();
-                        String garantia = scanner.nextLine();
-
-                        Eletronico eletronico = new Eletronico(nome, valor, estoque,garantia);
-                        sistema.cadastraProduto(eletronico);
-                        System.out.println("Cadastrado com sucesso");
+                    else if(escolhasubmenu == 0){
+                        System.out.println("\n\nVoltando ao menu\n\n");
                     }
+                    else if(verificaSubMenu && escolhasubmenu == 1){
 
-                }while(menuOp>0 || menuOp >2);
-            //Cadastrar produto
+                            scanner.nextLine();
+                            System.out.println("Entre com o nome do alimento");
+                            nome = scanner.nextLine();
+
+                            System.out.println("Entre com o preco");
+                            valor = scanner.nextDouble();
+
+                            System.out.println("Entre com o estoque");
+                            estoque = scanner.nextInt();
+                            scanner.nextLine();
+                            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                            System.out.println("Entre com a validade");
+                            String validadeTexto = scanner.nextLine();
+
+                            LocalDate validade = LocalDate.parse(validadeTexto, formato);
+
+                            Alimento p = new Alimento(nome,valor,estoque,validade);
+                            sistema.cadastraProduto(p);
+                            System.out.println("\n\nAlimento cadastrado com sucesso\n\n");
+
+                        }
+
+                        else if(verificaSubMenu && escolhasubmenu == 2){
+                            scanner.nextLine();
+                            System.out.println("Entre com o nome do Eletronico");
+                            nome = scanner.nextLine();
+
+                            System.out.println("Entre com o preco");
+                            valor = scanner.nextInt();
+
+                            System.out.println("Entre com o estoque");
+                            estoque = scanner.nextInt();
+
+                            System.out.println("Entre com a garantia");
+                            scanner.nextLine();
+                            String garantia = scanner.nextLine();
+
+                            Eletronico eletronico = new Eletronico(nome, valor, estoque,garantia);
+                            sistema.cadastraProduto(eletronico);
+                            System.out.println("\n\nCadastrado com sucesso\n\n");
+                        }
+
+                }while(escolhasubmenu != 0);
 
 
         } // Cadastrar Produto

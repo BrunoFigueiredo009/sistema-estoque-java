@@ -14,6 +14,13 @@ import java.util.Scanner;
          return valor;
      }
 
+     public boolean verificaSubMenu(int valor){
+         if(valor >= 0 && valor <= 2){
+             return true;
+         }
+         return false;
+     }
+
      public int verificaNumeroMenu(int a, Scanner scanner) {
          while (a < 0 || a > 7) {
              System.out.println("Entre com um valor valido");

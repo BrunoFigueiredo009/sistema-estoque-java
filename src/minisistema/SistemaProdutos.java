@@ -23,7 +23,7 @@ import java.util.Scanner;
      }
 
      public int verificaNumeroMenu(int a, Scanner scanner) {
-         while (a < 0 || a > 8) {
+         while (a < 0 || a > 9) {
              System.out.println("Entre com um valor valido");
              a = scanner.nextInt();
          }
@@ -127,6 +127,7 @@ import java.util.Scanner;
                 if (a.estaVencido()){
                     System.out.println(a.getNome());
                      encontrouVencido = true;
+
                     }
                 }
             }
@@ -134,4 +135,18 @@ import java.util.Scanner;
              System.out.println("Nenhum alimento vencido");
          }
          }
+
+     public void listarEstoqueBaixo(){
+         boolean listaEstoque = false;
+         for(int i = 0; i< produto.size(); i++){
+             Produto p = produto.get(i);
+             if(p.getEstoque()<10){
+                 System.out.println(p.getNome());
+                 listaEstoque = true;
+             }
+         }
+         if(!listaEstoque){
+             System.out.println("Nenhum produto com estoque baixo");
+         }
+     }
      }

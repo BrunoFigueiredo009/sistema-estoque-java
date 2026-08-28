@@ -8,14 +8,15 @@ public class Main {
 
     static void menu() {
     System.out.println("\n\n====== SISTEMA DE PRODUTOS ======");
-    System.out.println("1 - Cadastrar Produto");
+    System.out.println("1 - Cadastrar produto");
     System.out.println("2 - Listar produtos");
     System.out.println("3 - Vender produto");
     System.out.println("4 - Ver estoque total");
-    System.out.println("5 - Editar Preco");
-    System.out.println("6 - Adcionar Estoque");
-    System.out.println("7 - Remover Produto");
+    System.out.println("5 - Editar preco");
+    System.out.println("6 - Adcionar estoque");
+    System.out.println("7 - Remover produto");
     System.out.println("8 - Listar produtos vencidos");
+    System.out.println("9- Produtos com estoque baixo");
     System.out.println("0 - Sair\n\n");
 }
 
@@ -156,7 +157,7 @@ public class Main {
                 System.out.println(sistema.somaEstoque());
             }
 
-        }//Soma de todos estoques
+        }//Soma de Todos Estoques
 
         else if (menuOp == 5) {
             System.out.println("\n\n====== EDITAR PRECO ======");
@@ -218,6 +219,10 @@ public class Main {
             sistema.listarAlimentosVencidos();
 
         } //Listar Produtos vencidos
+        else if (menuOp == 9) {
+            System.out.println("====== LISTAR ESTOQUE BAIXO ======");
+            sistema.listarEstoqueBaixo();
+        }//Listar Estoque Baixo
 
     }while(menuOp != 0);}}
 

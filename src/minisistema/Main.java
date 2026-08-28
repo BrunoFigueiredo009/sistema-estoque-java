@@ -17,7 +17,8 @@ public class Main {
     System.out.println("7 - Remover produto");
     System.out.println("8 - Listar produtos vencidos");
     System.out.println("9- Produtos com estoque baixo");
-        System.out.println("10 - Visualizar Produtos por determinados valores");
+    System.out.println("10 - Visualizar Produtos por determinados valores");
+    System.out.println("11 - Mostrar Produto mais caro");
     System.out.println("0 - Sair\n\n");
 }
 
@@ -232,6 +233,17 @@ public class Main {
             sistema.produtosAcimaDePreco(valorProdutoAcima);
 
         } //Verifica Produtos Acima do Valor Informado
+
+        else if (menuOp == 11) {
+
+            Produto p = sistema.buscaMaisCaro();
+            if (p != null){
+                System.out.println("====== PRODUTO MAIS CARO ======");
+                System.out.println(p.getNome() + " - R$"+p.getPreco());
+            }else{
+                System.out.println("Não Existe produto na lista");
+            }
+        } //Mostra Maior Valor
 
     }while(menuOp != 0);}}
 

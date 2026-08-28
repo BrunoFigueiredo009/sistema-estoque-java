@@ -23,7 +23,7 @@ import java.util.Scanner;
      }
 
      public int verificaNumeroMenu(int a, Scanner scanner) {
-         while (a < 0 || a > 11) {
+         while (a < 0 || a > 12) {
              System.out.println("Entre com um valor valido");
              a = scanner.nextInt();
          }
@@ -180,6 +180,21 @@ import java.util.Scanner;
 
 
 
+     }
+
+     public Produto buscaMenorEstoque(){
+         if(produto.isEmpty()){
+             return null;
+         }else{
+             Produto buscaEstoqueMenor = produto.get(0);
+
+             for(int i = 0; i < produto.size(); i++){
+                 Produto p = produto.get(i);
+                 if(p.getEstoque() < buscaEstoqueMenor.getEstoque()){
+                     buscaEstoqueMenor = p;
+                 }
+             }return buscaEstoqueMenor;
+         }
      }
 
  }

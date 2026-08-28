@@ -19,6 +19,7 @@ public class Main {
     System.out.println("9- Produtos com estoque baixo");
     System.out.println("10 - Visualizar Produtos por determinados valores");
     System.out.println("11 - Mostrar Produto mais caro");
+    System.out.println("12 - Busca por menor estoque");
     System.out.println("0 - Sair\n\n");
 }
 
@@ -93,7 +94,7 @@ public class Main {
                             nome = scanner.nextLine();
 
                             System.out.println("Entre com o preco");
-                            valor = scanner.nextInt();
+                            valor = scanner.nextDouble();
 
                             System.out.println("Entre com o estoque");
                             estoque = scanner.nextInt();
@@ -244,6 +245,17 @@ public class Main {
                 System.out.println("Não Existe produto na lista");
             }
         } //Mostra Maior Valor
+
+        else if (menuOp == 12) {
+            System.out.println("====== PRODUTO COM MENOR ESTOQUE ======");
+            Produto p = sistema.buscaMenorEstoque();
+
+            if(p != null){
+                System.out.println("Produto com menor estoque: " + p.getNome()+ " - Estoque: "+p.getEstoque());
+            }else{
+                System.out.println("Não existe produto na lista");
+            }
+        } //Produto com menor estoque
 
     }while(menuOp != 0);}}
 

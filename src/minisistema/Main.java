@@ -17,6 +17,7 @@ public class Main {
     System.out.println("7 - Remover produto");
     System.out.println("8 - Listar produtos vencidos");
     System.out.println("9- Produtos com estoque baixo");
+        System.out.println("10 - Visualizar Produtos por determinados valores");
     System.out.println("0 - Sair\n\n");
 }
 
@@ -223,6 +224,14 @@ public class Main {
             System.out.println("====== LISTAR ESTOQUE BAIXO ======");
             sistema.listarEstoqueBaixo();
         }//Listar Estoque Baixo
+
+        else if (menuOp == 10) {
+            System.out.println("====== PRODUTOS ACIMA DO VALOR ======");
+            System.out.println("Entre com o valor do produto que deseja ver");
+            double valorProdutoAcima = scanner.nextDouble();
+            sistema.produtosAcimaDePreco(valorProdutoAcima);
+
+        } //Verifica Produtos Acima do Valor Informado
 
     }while(menuOp != 0);}}
 

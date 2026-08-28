@@ -23,7 +23,7 @@ import java.util.Scanner;
      }
 
      public int verificaNumeroMenu(int a, Scanner scanner) {
-         while (a < 0 || a > 9) {
+         while (a < 0 || a > 10) {
              System.out.println("Entre com um valor valido");
              a = scanner.nextInt();
          }
@@ -147,6 +147,20 @@ import java.util.Scanner;
          }
          if(!listaEstoque){
              System.out.println("Nenhum produto com estoque baixo");
+         }
+     }
+
+     public void produtosAcimaDePreco(double valor){
+         boolean verificaAcimaPreco = false;
+         for(int i =0; i < produto.size(); i++){
+             Produto p = produto.get(i);
+             if(p.getPreco() > valor){
+                 System.out.println(p.getNome() + " - R$"+ p.getPreco());
+                 verificaAcimaPreco = true;
+             }
+         }
+         if(!verificaAcimaPreco){
+             System.out.println("Nenhum produto informado está acima do valor");
          }
      }
      }

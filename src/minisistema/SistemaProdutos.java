@@ -1,5 +1,6 @@
 package minisistema;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ import java.util.Scanner;
      }
 
      public int verificaNumeroMenu(int a, Scanner scanner) {
-         while (a < 0 || a > 7) {
+         while (a < 0 || a > 8) {
              System.out.println("Entre com um valor valido");
              a = scanner.nextInt();
          }
@@ -116,5 +117,21 @@ import java.util.Scanner;
          }return false;
      }
 
+     public void listarAlimentosVencidos() {
+         boolean encontrouVencido = false;
 
- }
+         for(int i = 0; i < produto.size(); i++){
+            Produto p = produto.get(i);
+
+            if(p instanceof Alimento a){
+                if (a.estaVencido()){
+                    System.out.println(a.getNome());
+                     encontrouVencido = true;
+                    }
+                }
+            }
+         if (!encontrouVencido){
+             System.out.println("Nenhum alimento vencido");
+         }
+         }
+     }

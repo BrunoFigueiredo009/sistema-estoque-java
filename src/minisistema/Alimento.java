@@ -1,5 +1,6 @@
 package minisistema;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class Alimento extends Produto implements Vendavel {
@@ -35,12 +36,21 @@ public class Alimento extends Produto implements Vendavel {
     }
 
     @Override // Também pode apenas modificar, Devido ao contrato vendavel
+
+
     public boolean vender(int quantidade){
 
         return realizaVenda(quantidade);
 
     }
+
+    public boolean estaVencido(){
+
+         LocalDate dataHoje = LocalDate.now();
+         return validade.isBefore(dataHoje);//Retorne se a validade é anterior à data de hoje.
+    }
 }
+
 
 
 

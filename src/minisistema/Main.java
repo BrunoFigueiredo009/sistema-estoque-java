@@ -15,7 +15,8 @@ public class Main {
     System.out.println("5 - Editar Preco");
     System.out.println("6 - Adcionar Estoque");
     System.out.println("7 - Remover Produto");
-    System.out.println("0 - Sair");
+    System.out.println("8 - Listar produtos vencidos");
+    System.out.println("0 - Sair\n\n");
 }
 
     static void subMenu(){
@@ -104,11 +105,11 @@ public class Main {
                 }while(escolhasubmenu != 0);
 
 
-        } // Cadastrar Produto
+        } // Cadastrar Produtos
 
         else if (menuOp == 2) {
             if (sistema.listaVazia()) {
-                System.out.println("Nemhum produto cadastrado, cadastre para visualizar");
+                System.out.println("Nenhum produto cadastrado, cadastre para visualizar");
             } else {
                 System.out.println("Produtos cadastrados:");
                 System.out.println(sistema.produtosCadastrados());
@@ -171,7 +172,7 @@ public class Main {
             }
 
 
-        }//Editar Produto
+        }//Editar Produtos
 
         else if(menuOp == 6){
             System.out.println("Qual produto deseja atualizar?");
@@ -205,6 +206,12 @@ public class Main {
 
 
         } //Remover
+
+        else if(menuOp == 8){
+            System.out.println("===== ALIMENTOS VENCIDOS =====");
+            sistema.listarAlimentosVencidos();
+
+        } //Listar Produtos vencidos
 
     }while(menuOp != 0);}}
 

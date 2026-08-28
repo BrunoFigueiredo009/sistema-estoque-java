@@ -23,7 +23,7 @@ import java.util.Scanner;
      }
 
      public int verificaNumeroMenu(int a, Scanner scanner) {
-         while (a < 0 || a > 13) {
+         while (a < 0 || a > 20) {
              System.out.println("Entre com um valor valido");
              a = scanner.nextInt();
          }
@@ -205,6 +205,17 @@ import java.util.Scanner;
 
          return valorTotal;
          }
+     public ArrayList<Produto> buscaProdutosSemEstoque(){
+         ArrayList<Produto> semEstoque = new ArrayList<>() ;
+         for(int i = 0; i<produto.size(); i++){
+             Produto p = produto.get(i);
+
+             if(p.getEstoque() == 0){
+                 semEstoque.add(p);
+             }
+
+         }return semEstoque;
+     }
 
 
  }

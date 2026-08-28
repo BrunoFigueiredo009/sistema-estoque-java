@@ -2,6 +2,7 @@ package minisistema;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -21,6 +22,7 @@ public class Main {
     System.out.println("11 - Mostrar Produto mais caro");
     System.out.println("12 - Busca por menor estoque");
     System.out.println("13 - Soma dos valores do estoque ");
+    System.out.println("14 - Produtos com estoques zerados");
     System.out.println("0 - Sair\n\n");
 }
 
@@ -261,6 +263,16 @@ public class Main {
             System.out.println("====== CALCULAR O VALOR TOTAL DO ESTOQUE ======");
             double valorTotalEstoque = sistema.calculaValorTotal();
             System.out.printf("O valor total do estoque é: R$ %.2f", valorTotalEstoque);
+
+        } else if (menuOp == 14) {
+            System.out.println("====== ESTOQUES ZERADOS ======");
+            ArrayList<Produto> produtosSemEstoque = sistema.buscaProdutosSemEstoque();
+
+            for(int i = 0; i < produtosSemEstoque.size(); i++ ){
+                 String nome = produtosSemEstoque.get(i).getNome();
+                System.out.println(nome);
+            }
+            System.out.println("Produtos com estoque zerados: "+produtosSemEstoque.size());
 
         }
 

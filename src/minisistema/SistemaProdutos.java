@@ -23,7 +23,7 @@ import java.util.Scanner;
      }
 
      public int verificaNumeroMenu(int a, Scanner scanner) {
-         while (a < 0 || a > 12) {
+         while (a < 0 || a > 13) {
              System.out.println("Entre com um valor valido");
              a = scanner.nextInt();
          }
@@ -178,8 +178,6 @@ import java.util.Scanner;
              return maisCaro;
          }
 
-
-
      }
 
      public Produto buscaMenorEstoque(){
@@ -196,5 +194,17 @@ import java.util.Scanner;
              }return buscaEstoqueMenor;
          }
      }
+
+     public double calculaValorTotal(){
+         double valorTotal = 0;
+
+            for(int i = 0; i < produto.size(); i++){
+                 Produto p = produto.get(i);
+                 valorTotal += p.getPreco()*p.getEstoque();
+             }
+
+         return valorTotal;
+         }
+
 
  }

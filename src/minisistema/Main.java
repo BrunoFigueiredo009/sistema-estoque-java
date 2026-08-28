@@ -20,6 +20,7 @@ public class Main {
     System.out.println("10 - Visualizar Produtos por determinados valores");
     System.out.println("11 - Mostrar Produto mais caro");
     System.out.println("12 - Busca por menor estoque");
+    System.out.println("13 - Soma dos valores do estoque ");
     System.out.println("0 - Sair\n\n");
 }
 
@@ -256,6 +257,12 @@ public class Main {
                 System.out.println("Não existe produto na lista");
             }
         } //Produto com menor estoque
+        else if (menuOp == 13) {
+            System.out.println("====== CALCULAR O VALOR TOTAL DO ESTOQUE ======");
+            double valorTotalEstoque = sistema.calculaValorTotal();
+            System.out.printf("O valor total do estoque é: R$ %.2f", valorTotalEstoque);
+
+        }
 
     }while(menuOp != 0);}}
 

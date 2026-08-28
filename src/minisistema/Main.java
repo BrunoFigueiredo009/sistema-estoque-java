@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
 
     static void menu() {
-    System.out.println("===== SISTEMA DE PRODUTOS =====");
+    System.out.println("\n\n====== SISTEMA DE PRODUTOS ======");
     System.out.println("1 - Cadastrar Produto");
     System.out.println("2 - Listar produtos");
     System.out.println("3 - Vender produto");
@@ -20,6 +20,7 @@ public class Main {
 }
 
     static void subMenu(){
+        System.out.println("\n\n====== CADASTRO ======");
         System.out.println("1 - Cadastrar Alimento");
         System.out.println("2 - Cadastrar Eletrônico");
         System.out.println("0 - Voltar");
@@ -59,7 +60,7 @@ public class Main {
                         System.out.println("\n\nVoltando ao menu\n\n");
                     }
                     else if(verificaSubMenu && escolhasubmenu == 1){
-
+                            System.out.println("\n\n====== CADASTRO DE ALIMENTO ======");
                             scanner.nextLine();
                             System.out.println("Entre com o nome do alimento");
                             nome = scanner.nextLine();
@@ -78,12 +79,13 @@ public class Main {
 
                             Alimento p = new Alimento(nome,valor,estoque,validade);
                             sistema.cadastraProduto(p);
-                            System.out.println("\n\nAlimento cadastrado com sucesso\n\n");
+                            System.out.println("\n\n====== Alimento cadastrado com sucesso ======\n\n");
 
                         }
 
                         else if(verificaSubMenu && escolhasubmenu == 2){
                             scanner.nextLine();
+                            System.out.println("\n\n====== CADASTRO DE ELETRONICO ======");
                             System.out.println("Entre com o nome do Eletronico");
                             nome = scanner.nextLine();
 
@@ -111,6 +113,7 @@ public class Main {
             if (sistema.listaVazia()) {
                 System.out.println("Nenhum produto cadastrado, cadastre para visualizar");
             } else {
+                System.out.println("\n\n====== LISTA DE PRODUTOS CADASTRADOS ======");
                 System.out.println("Produtos cadastrados:");
                 System.out.println(sistema.produtosCadastrados());
             }
@@ -123,6 +126,7 @@ public class Main {
             if (sistema.listaVazia()) {
                 System.out.println("Lista Vazia");
             } else {
+                System.out.println("\n\n====== VENDA DE PRODUTO ======");
                 System.out.println("Digite o produto vendido");
                 scanner.nextLine();
                 busca = scanner.nextLine();
@@ -147,7 +151,7 @@ public class Main {
             if (sistema.listaVazia()) {
                 System.out.println("Lista Vazia\nCadastre para visualizar os produtos");
             } else {
-                System.out.println("------ ESTOQUE DE PRODUTOS TOTAL ------\n" + sistema.produtosCadastrados());
+                System.out.println("===== ESTOQUE ======\n" + sistema.produtosCadastrados());
                 System.out.println("Soma de estoque Geral: ");
                 System.out.println(sistema.somaEstoque());
             }
@@ -155,7 +159,7 @@ public class Main {
         }//Soma de todos estoques
 
         else if (menuOp == 5) {
-
+            System.out.println("\n\n====== EDITAR PRECO ======");
             System.out.println("Qual produto Deseja editar?");
             scanner.nextLine();
             String nome = scanner.nextLine();
@@ -175,6 +179,7 @@ public class Main {
         }//Editar Produtos
 
         else if(menuOp == 6){
+            System.out.println("\n\n====== ATUALIZAR ESTOQUE ======");
             System.out.println("Qual produto deseja atualizar?");
             scanner.nextLine();
             busca = scanner.nextLine();
@@ -185,7 +190,7 @@ public class Main {
             boolean alterou = sistema.atualizaEstoque(busca, atualiza);
 
             if(alterou){
-                System.out.println("Produto Atualizado com sucesso");
+                System.out.println("Atualizado com sucesso ");
             }else{
                 System.out.println("Erro ao atualizar");
             }
@@ -193,15 +198,16 @@ public class Main {
         } //Adcionar Estoque
 
         else if(menuOp == 7){
+            System.out.println("\n\n====== REMOVER PRODUTO ======");
             System.out.println("Entre com o nome do produto que deseja remover");
             scanner.nextLine();
             String removeProduto = scanner.nextLine();
             boolean remove = sistema.removerProdutos(removeProduto);
 
             if(remove){
-                System.out.println("Produto Excluido com Sucesso");
+                System.out.println("Excluido com sucesso");
             }else{
-                System.out.println("Erro ao Excluir");
+                System.out.println("Erro ao excluir");;
             }
 
 

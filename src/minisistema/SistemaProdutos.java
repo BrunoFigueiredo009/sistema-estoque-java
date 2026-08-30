@@ -7,44 +7,24 @@ import java.util.Scanner;
  public class SistemaProdutos {
      private ArrayList<Produto> produto = new ArrayList<>();
 
-     public double verificaPreco(double valor, Scanner scanner) {
-         while (valor <= 0) {
-             System.out.println("Entre com um valor válido");
-             valor = scanner.nextDouble();
+     public boolean precoMenorQue0(double valor) {
+         if (valor <= 0) {
+             return false;
          }
-         return valor;
+         return true;
      }
 
-     public boolean verificaSubMenu(int valor){
-         if(valor >= 0 && valor <= 2){
+     public boolean verificaSubMenu(int valor, int maximo){
+
+         return valor >= 0 && valor <= maximo;
+     }
+
+     public boolean verificaNumeroMenu(int a, int maximo) {
+         if(a < 0 || a > maximo) {
+             return false;
+         }else{
              return true;
          }
-         return false;
-     }
-
-     public int verificaNumeroMenu(int a, Scanner scanner) {
-         while (a < 0 || a > 20) {
-             System.out.println("Entre com um valor valido");
-             a = scanner.nextInt();
-         }
-         return a;
-     }
-
-     public int verificaNumeroVendaEstoque(int a, Scanner scanner) {
-         while (a <= 0) {
-             System.out.println("Entre com um numero valido");
-             a = scanner.nextInt();
-         }
-
-         return a;
-     }
-
-     public int verificaNumeroEstoque(int estoque, Scanner scanner) {
-         while (estoque < 0) {
-             System.out.println("Entre com um estoque valido");
-             estoque = scanner.nextInt();
-         }
-         return estoque;
      }
 
      public void cadastraProduto(Produto alimento) {
@@ -180,21 +160,6 @@ import java.util.Scanner;
 
      }
 
-     public Produto buscaMenorEstoque(){
-         if(produto.isEmpty()){
-             return null;
-         }else{
-             Produto buscaEstoqueMenor = produto.get(0);
-
-             for(int i = 0; i < produto.size(); i++){
-                 Produto p = produto.get(i);
-                 if(p.getEstoque() < buscaEstoqueMenor.getEstoque()){
-                     buscaEstoqueMenor = p;
-                 }
-             }return buscaEstoqueMenor;
-         }
-     }
-
      public double calculaValorTotal(){
          double valorTotal = 0;
 
@@ -205,6 +170,7 @@ import java.util.Scanner;
 
          return valorTotal;
          }
+
      public ArrayList<Produto> buscaProdutosSemEstoque(){
          ArrayList<Produto> semEstoque = new ArrayList<>() ;
          for(int i = 0; i<produto.size(); i++){

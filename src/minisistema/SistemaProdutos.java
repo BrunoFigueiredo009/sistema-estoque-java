@@ -7,11 +7,10 @@ import java.util.Scanner;
  public class SistemaProdutos {
      private ArrayList<Produto> produto = new ArrayList<>();
 
-     public boolean precoMenorQue0(double valor) {
-         if (valor <= 0) {
-             return false;
-         }
-         return true;
+     public boolean numeroMaiorZero(double valor) {
+         return valor > 0;
+
+
      }
 
      public boolean verificaSubMenu(int valor, int maximo){

@@ -209,6 +209,7 @@ public class Main {
                 else if (menuOp == 3) {
 
                     do {
+                        boolean vendeu;
                         System.out.println("\n\n====== VENDAS ======");
                         System.out.println("1 - Vender Produto");
                         System.out.println("0 - Voltar");
@@ -229,8 +230,11 @@ public class Main {
                             System.out.println("Digite o produto vendido");
                             scanner.nextLine();
                             busca = scanner.nextLine();
+
+
                             System.out.println("Digite a quantidade da venda");
                             int quantVendido = sistema.lerInteiroValido(scanner);
+
 
                             verificaNumero = sistema.numeroMaiorZero(quantVendido);
 
@@ -240,13 +244,16 @@ public class Main {
                                 verificaNumero = sistema.numeroMaiorZero(quantVendido);
 
                             }
+                            try {
+                                vendeu = sistema.venderProduto(busca, quantVendido);
 
-                            boolean vendeu = sistema.venderProduto(busca, quantVendido);
+                            }catch (EstoqueInsuficienteException e){
+                                System.out.println(e.getMessage());
+                                vendeu = false;
 
+                            }
                             if (vendeu) {
                                 System.out.println("Produto vendido");
-                            } else {
-                                System.out.println("Falha");
                             }
                         }//Vender produto
 

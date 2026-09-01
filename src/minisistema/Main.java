@@ -67,9 +67,7 @@ public class Main {
                             System.out.println("\n\nVoltando ao menu\n\n");
                             break;
 
-                        }
-
-                        else if (op == 1) {
+                        } else if (op == 1) {
                             System.out.println("\n\n====== CADASTRO DE ALIMENTO ======");
                             scanner.nextLine();
                             System.out.println("Entre com o nome do alimento");
@@ -92,16 +90,15 @@ public class Main {
 
                             while (!verificaNumero) {
                                 System.out.println("Entre com um estoque válido");
-                               estoque = sistema.lerInteiroValido(scanner);
+                                estoque = sistema.lerInteiroValido(scanner);
                                 verificaNumero = sistema.numeroMaiorZero(estoque);
                             }
 
                             scanner.nextLine();
-                            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                            System.out.println("Entre com a validade");
-                            String validadeTexto = scanner.nextLine();
 
-                            LocalDate validade = LocalDate.parse(validadeTexto, formato);
+                            System.out.println("Entre com a validade");
+
+                            LocalDate validade = sistema.dataProdutoValida(scanner);
 
                             Alimento p = new Alimento(nome, valor, estoque, validade);
                             sistema.cadastraProduto(p);
@@ -169,14 +166,10 @@ public class Main {
                             continue;
                         } else if (op == 0) {
                             break;
-                        }
-
-                        else if (sistema.listaVazia()) {
+                        } else if (sistema.listaVazia()) {
                             System.out.println("Nenhum produto cadastrado, cadastre para visualizar");
                             break;
-                        }
-
-                        else if (op == 1) {
+                        } else if (op == 1) {
                             System.out.println("====== PRODUTOS ACIMA DO VALOR ======");
                             System.out.println("Entre com o valor do produto que deseja ver");
                             double valorProdutoAcima = scanner.nextDouble();

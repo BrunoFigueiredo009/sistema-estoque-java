@@ -1,10 +1,11 @@
 package minisistema;
 
+import java.text.DateFormat;
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 public class SistemaProdutos {
     private List<Produto> produto = new ArrayList<>();
@@ -212,6 +213,25 @@ public class SistemaProdutos {
             }
         } while (!verificaNumero);
         return a;
+    }
+
+    public LocalDate dataProdutoValida(Scanner scanner){
+        boolean dataValida = false;
+        LocalDate data = null;
+        String dataString;
+        do{
+            try{
+                java.time.format.DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                dataString = scanner.nextLine();
+                 data = LocalDate.parse(dataString,formato);
+                dataValida = true;
+            }catch (DateTimeParseException e){
+                System.out.println("Entre com uma data valida: dd/mm/yyyy");
+
+            }
+        }while(!dataValida);
+        return data;
     }
 
 }

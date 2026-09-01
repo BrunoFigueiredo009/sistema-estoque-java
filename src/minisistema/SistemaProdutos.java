@@ -2,10 +2,11 @@ package minisistema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SistemaProdutos {
-    private ArrayList<Produto> produto = new ArrayList<>();
+    private List<Produto> produto = new ArrayList<>();
 
     public boolean numeroMaiorZero(double valor) {
         return valor > 0;
@@ -36,7 +37,7 @@ public class SistemaProdutos {
 
 
 
-    public ArrayList<Produto> produtosCadastrados() {
+    public List<Produto> produtosCadastrados() {
         return produto;
     }
 
@@ -165,7 +166,7 @@ public class SistemaProdutos {
         return menorEstoque;
     } //for-each
 
-    public ArrayList<Produto> buscaProdutosSemEstoque() {
+    public List<Produto> buscaProdutosSemEstoque() {
         ArrayList<Produto> semEstoque = new ArrayList<>();
         for(Produto p : produto){
             if(p.getEstoque() == 0){

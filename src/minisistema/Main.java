@@ -3,6 +3,7 @@ package minisistema;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,11 +31,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean verificaSubMenu;
         boolean verificaNumero;
-        int menuOp;
+        int menuOp = 0;
 
         do {
             menu();
-            menuOp = scanner.nextInt();
+
+            menuOp = sistema.lerInteiroValido(scanner);
 
             boolean verificaMenu = sistema.verificaNumeroMenu(menuOp, 5);
 
@@ -54,17 +56,17 @@ public class Main {
                         double valor;
                         int estoque;
                         subMenu();
-                        op = scanner.nextInt();
+
+                        op = sistema.lerInteiroValido(scanner);
                         verificaSubMenu = sistema.verificaSubMenu(op, 2);
 
                         if (!verificaSubMenu) {
                             System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
                             continue;
-                        }
-
-                        else if (op == 0) {
+                        } else if (op == 0) {
                             System.out.println("\n\nVoltando ao menu\n\n");
                             break;
+
                         }
 
                         else if (op == 1) {
@@ -85,12 +87,12 @@ public class Main {
                             }
 
                             System.out.println("Entre com o estoque");
-                            estoque = scanner.nextInt();
+                            estoque = sistema.lerInteiroValido(scanner);
                             verificaNumero = sistema.numeroMaiorZero(estoque);
 
-                            while (!verificaNumero){
+                            while (!verificaNumero) {
                                 System.out.println("Entre com um estoque válido");
-                                estoque = scanner.nextInt();
+                               estoque = sistema.lerInteiroValido(scanner);
                                 verificaNumero = sistema.numeroMaiorZero(estoque);
                             }
 
@@ -118,20 +120,20 @@ public class Main {
 
                             verificaNumero = sistema.numeroMaiorZero(valor);
 
-                            while(!verificaNumero){
+                            while (!verificaNumero) {
                                 System.out.println("Entre com um preço válido");
                                 valor = scanner.nextDouble();
                                 verificaNumero = sistema.numeroMaiorZero(valor);
                             }
 
                             System.out.println("Entre com o estoque");
-                            estoque = scanner.nextInt();
+                            estoque = sistema.lerInteiroValido(scanner);
 
                             verificaNumero = sistema.numeroMaiorZero(estoque);
 
-                            while(!verificaNumero){
+                            while (!verificaNumero) {
                                 System.out.println("Entre com um estoque válido");
-                                estoque = scanner.nextInt();
+                                estoque = sistema.lerInteiroValido(scanner);
                                 verificaNumero = sistema.numeroMaiorZero(estoque);
                             }
 
@@ -146,7 +148,6 @@ public class Main {
 
                     } while (op != 0);
 
-
                 } //Cadastrar Produtos
 
                 else if (menuOp == 2) {
@@ -159,15 +160,14 @@ public class Main {
                                 3 - Consultar produtos vencidos
                                 4 - Consultar todos produtos
                                 0 - Sair""");
-                        op = scanner.nextInt();
+
+                        op = sistema.lerInteiroValido(scanner);
                         verificaSubMenu = sistema.verificaSubMenu(op, 4);
 
                         if (!verificaSubMenu) {
                             System.out.println("Numero invalido");
                             continue;
-                        }
-
-                        else if (op == 0) {
+                        } else if (op == 0) {
                             break;
                         }
 
@@ -219,21 +219,16 @@ public class Main {
                         System.out.println("\n\n====== VENDAS ======");
                         System.out.println("1 - Vender Produto");
                         System.out.println("0 - Voltar");
-                        op = scanner.nextInt();
-
+                        op = sistema.lerInteiroValido(scanner);
                         verificaSubMenu = sistema.verificaSubMenu(op, 1);
 
                         if (!verificaSubMenu) {
                             System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
                             continue;
-                        }
-
-                        else if (op == 0) {
+                        } else if (op == 0) {
                             System.out.println("\n\nVoltando ao menu\n\n");
                             break;
-                        }
-
-                        else if (op == 1) {
+                        } else if (op == 1) {
                             if (sistema.listaVazia()) {
                                 System.out.println("Lista Vazia");
                                 break;
@@ -242,13 +237,13 @@ public class Main {
                             scanner.nextLine();
                             busca = scanner.nextLine();
                             System.out.println("Digite a quantidade da venda");
-                            int quantVendido = scanner.nextInt();
+                            int quantVendido = sistema.lerInteiroValido(scanner);
 
                             verificaNumero = sistema.numeroMaiorZero(quantVendido);
 
-                            while(!verificaNumero){
+                            while (!verificaNumero) {
                                 System.out.println("Entre com uma venda válida");
-                                quantVendido = scanner.nextInt();
+                                quantVendido = sistema.lerInteiroValido(scanner);
                                 verificaNumero = sistema.numeroMaiorZero(quantVendido);
 
                             }
@@ -273,7 +268,7 @@ public class Main {
                                 1 - Editar preço
                                 2 - Remover Produto
                                 0 - Voltar""");
-                        op = scanner.nextInt();
+                        op = sistema.lerInteiroValido(scanner);
                         verificaSubMenu = sistema.verificaSubMenu(op, 2);
 
                         if (!verificaSubMenu) {
@@ -335,7 +330,7 @@ public class Main {
                                 5 - Soma do estoque geral
                                 6 - Produto com menor estoque
                                 0 - Voltar""");
-                        op = scanner.nextInt();
+                        op = sistema.lerInteiroValido(scanner);
                         verificaSubMenu = sistema.verificaSubMenu(op, 6);
 
                         if (!verificaSubMenu) {
@@ -356,7 +351,7 @@ public class Main {
                             busca = scanner.nextLine();
 
                             System.out.println("Digite o valor do estoque para atualizar");
-                            int atualiza = scanner.nextInt();
+                            int atualiza = sistema.lerInteiroValido(scanner);
 
                             boolean alterou = sistema.atualizaEstoque(busca, atualiza);
 
@@ -384,10 +379,10 @@ public class Main {
                             System.out.println("====== LISTAR ESTOQUE BAIXO ======");
 
                             int quantidadeEstoqueBaixo = sistema.quantidadeEstoqueBaixa();
-                            if(quantidadeEstoqueBaixo == 0){
+                            if (quantidadeEstoqueBaixo == 0) {
                                 System.out.println("Não existe produtos com estoque baixo");
-                            }else{
-                                System.out.println("Quantidade de produtos com estoque baixo: "+quantidadeEstoqueBaixo);
+                            } else {
+                                System.out.println("Quantidade de produtos com estoque baixo: " + quantidadeEstoqueBaixo);
                             }
                         }//Produtos com estoque baixo
 
@@ -408,7 +403,7 @@ public class Main {
                         else if (op == 6) {
                             System.out.println("====== MENOR ESTOQUE ======");
 
-                            System.out.println("Nome: "+sistema.buscaMenorEstoque().getNome()+" - Estoque: "+sistema.buscaMenorEstoque().getEstoque());
+                            System.out.println("Nome: " + sistema.buscaMenorEstoque().getNome() + " - Estoque: " + sistema.buscaMenorEstoque().getEstoque());
 
                         }
 

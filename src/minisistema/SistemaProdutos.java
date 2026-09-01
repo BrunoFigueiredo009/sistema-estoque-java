@@ -2,6 +2,7 @@ package minisistema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,7 +35,6 @@ public class SistemaProdutos {
     public boolean listaVazia() {
         return produto.isEmpty();
     }
-
 
 
     public List<Produto> produtosCadastrados() {
@@ -122,7 +122,7 @@ public class SistemaProdutos {
         }
     }//for-each
 
-     public double calculaValorTotal() {
+    public double calculaValorTotal() {
         double valorTotal = 0;
 
         for (Produto p : produto) {
@@ -146,12 +146,12 @@ public class SistemaProdutos {
     }//for-each
 
     public Produto buscaMenorEstoque() {
-        if(produto.isEmpty()){
+        if (produto.isEmpty()) {
             return null;
         }
 
         Produto menorEstoque = produto.get(0);
-        if(menorEstoque.getEstoque() == 0){
+        if (menorEstoque.getEstoque() == 0) {
             return menorEstoque;
         }
 
@@ -168,8 +168,8 @@ public class SistemaProdutos {
 
     public List<Produto> buscaProdutosSemEstoque() {
         ArrayList<Produto> semEstoque = new ArrayList<>();
-        for(Produto p : produto){
-            if(p.getEstoque() == 0){
+        for (Produto p : produto) {
+            if (p.getEstoque() == 0) {
                 semEstoque.add(p);
             }
         }
@@ -198,4 +198,20 @@ public class SistemaProdutos {
         }
         return null;
     }//for-each
+
+    public int lerInteiroValido(Scanner scanner) {
+        boolean verificaNumero = false;
+        int a = 0;
+        do {
+            try {
+                 a = scanner.nextInt();
+                verificaNumero = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Entre com um número válido");
+                scanner.nextLine();
+            }
+        } while (!verificaNumero);
+        return a;
+    }
+
 }

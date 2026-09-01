@@ -4,183 +4,197 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
- public class SistemaProdutos {
-     private ArrayList<Produto> produto = new ArrayList<>();
+public class SistemaProdutos {
+    private ArrayList<Produto> produto = new ArrayList<>();
 
-     public boolean numeroMaiorZero(double valor) {
-         return valor > 0;
+    public boolean numeroMaiorZero(double valor) {
+        return valor > 0;
 
 
-     }
+    }
 
-     public boolean verificaSubMenu(int valor, int maximo){
+    public boolean verificaSubMenu(int valor, int maximo) {
 
-         return valor >= 0 && valor <= maximo;
-     }
+        return valor >= 0 && valor <= maximo;
+    }
 
-     public boolean verificaNumeroMenu(int a, int maximo) {
-         if(a < 0 || a > maximo) {
-             return false;
-         }else{
-             return true;
-         }
-     }
+    public boolean verificaNumeroMenu(int a, int maximo) {
+        if (a < 0 || a > maximo) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-     public void cadastraProduto(Produto alimento) {
-         produto.add(alimento);
-     }
+    public void cadastraProduto(Produto alimento) {
+        produto.add(alimento);
+    }
 
-     public boolean listaVazia() {
-         return produto.isEmpty();
-     }
+    public boolean listaVazia() {
+        return produto.isEmpty();
+    }
 
-     public Produto buscarProduto(String nome) {
-         for (int i = 0; i < produto.size(); i++) {
-             if (produto.get(i).getNome().equals(nome)) {
-                 return produto.get(i);
-             }
-         }
-         return null;
-     }
 
-     public ArrayList<Produto> produtosCadastrados() {
-         return produto;
-     }
 
-     public boolean atualizaPreco(String nome, double a) {
+    public ArrayList<Produto> produtosCadastrados() {
+        return produto;
+    }
 
-         Produto encontrado = buscarProduto(nome);
+    public boolean atualizaPreco(String nome, double a) {
 
-         if (encontrado != null) {
-             return encontrado.setPreco(a);
-         }
+        Produto encontrado = buscarProduto(nome);
 
-         return false;
-     }
+        if (encontrado != null) {
+            return encontrado.setPreco(a);
+        }
 
-     public boolean atualizaEstoque(String nome, int a) {
-         Produto encontrado = buscarProduto(nome);
+        return false;
+    }
 
-         if (encontrado != null) {
-             return encontrado.aumentaEstoque(a);
-         }
-         return false;
-     }
+    public boolean atualizaEstoque(String nome, int a) {
+        Produto encontrado = buscarProduto(nome);
 
-     public int somaEstoque() {
-         int soma = 0;
-         for (int i = 0; i < produto.size(); i++) {
-             soma += produto.get(i).getEstoque();
-         }
-         return soma;
-     }
+        if (encontrado != null) {
+            return encontrado.aumentaEstoque(a);
+        }
+        return false;
+    }
 
-     public boolean venderProduto(String nome, int quantidade) {
-         Produto encontrado = buscarProduto(nome);
+    public int somaEstoque() {
+        int contEstoque = 0;
+        for (Produto p : produto) {
+            contEstoque += p.getEstoque();
+        }
+        return contEstoque;
+    }//for-each
 
-             if (encontrado instanceof Vendavel v){
-                 //Ja confirmei que a encontrado é vendavel. Agora quero trata-la como vendavel
+    public boolean venderProduto(String nome, int quantidade) {
+        Produto encontrado = buscarProduto(nome);
 
-                 return v.vender(quantidade);
-             }
+        if (encontrado instanceof Vendavel v) {
+            //Ja confirmei que a encontrado é vendavel. Agora quero trata-la como vendavel
 
-         return false;
+            return v.vender(quantidade);
+        }
 
-     }
+        return false;
 
-     public boolean removerProdutos(String nome) {
-         Produto encontrado = buscarProduto(nome);
-         if (encontrado != null){
-             return produto.remove(encontrado);
+    }
 
-         }return false;
-     }
+    public boolean removerProdutos(String nome) {
+        Produto encontrado = buscarProduto(nome);
+        if (encontrado != null) {
+            return produto.remove(encontrado);
 
-     public void listarAlimentosVencidos() {
-         boolean encontrouVencido = false;
+        }
+        return false;
+    }
 
-         for(int i = 0; i < produto.size(); i++){
-            Produto p = produto.get(i);
+    public void listarAlimentosVencidos() {
+        boolean encontrouVencido = false;
 
-            if(p instanceof Alimento a){
-                if (a.estaVencido()){
+        for (Produto p : produto) {
+
+            if (p instanceof Alimento a) {
+                if (a.estaVencido()) {
                     System.out.println(a.getNome());
-                     encontrouVencido = true;
+                    encontrouVencido = true;
 
-                    }
                 }
             }
-         if (!encontrouVencido){
-             System.out.println("Nenhum alimento vencido");
-         }
-         }
+        }
+        if (!encontrouVencido) {
+            System.out.println("Nenhum alimento vencido");
+        }
+    }//for-each
 
-     public void listarEstoqueBaixo(){
-         boolean listaEstoque = false;
-         for(int i = 0; i< produto.size(); i++){
-             Produto p = produto.get(i);
-             if(p.getEstoque()<10){
-                 System.out.println(p.getNome());
-                 listaEstoque = true;
-             }
-         }
-         if(!listaEstoque){
-             System.out.println("Nenhum produto com estoque baixo");
-         }
-     }
+    public void produtosAcimaDePreco(double valor) {
+        boolean verificaAcimaPreco = false;
+        for (Produto p : produto) {
+            if (p.getPreco() > valor) {
+                System.out.println(p.getNome() + " - R$" + p.getPreco());
+                verificaAcimaPreco = true;
+            }
+        }
+        if (!verificaAcimaPreco) {
+            System.out.println("Nenhum produto informado está acima do valor");
+        }
+    }//for-each
 
-     public void produtosAcimaDePreco(double valor){
-         boolean verificaAcimaPreco = false;
-         for(int i =0; i < produto.size(); i++){
-             Produto p = produto.get(i);
-             if(p.getPreco() > valor){
-                 System.out.println(p.getNome() + " - R$"+ p.getPreco());
-                 verificaAcimaPreco = true;
-             }
-         }
-         if(!verificaAcimaPreco){
-             System.out.println("Nenhum produto informado está acima do valor");
-         }
-     }
+     public double calculaValorTotal() {
+        double valorTotal = 0;
 
-     public Produto buscaMaisCaro(){
-         if(produto.isEmpty()){
-             return null;
-         } else {
-             Produto maisCaro = produto.get(0);
-             for(int i = 0; i < produto.size(); i++){
-                 Produto p = produto.get(i);
-                 if(p.getPreco() > maisCaro.getPreco()){
-                     maisCaro = p;
-                 }
-             }
-             return maisCaro;
-         }
+        for (Produto p : produto) {
+            valorTotal += p.getEstoque() * p.getPreco();
+        }
 
-     }
+        return valorTotal;
 
-     public double calculaValorTotal(){
-         double valorTotal = 0;
+    } //for-each
 
-            for(int i = 0; i < produto.size(); i++){
-                 Produto p = produto.get(i);
-                 valorTotal += p.getPreco()*p.getEstoque();
-             }
+    public int quantidadeEstoqueBaixa() {
+        int i = 0;
 
-         return valorTotal;
-         }
+        for (Produto p : produto) {
+            if (p.getEstoque() < 10) {
+                i += 1;
+            }
+        }
+        return i;
 
-     public ArrayList<Produto> buscaProdutosSemEstoque(){
-         ArrayList<Produto> semEstoque = new ArrayList<>() ;
-         for(int i = 0; i<produto.size(); i++){
-             Produto p = produto.get(i);
+    }//for-each
 
-             if(p.getEstoque() == 0){
-                 semEstoque.add(p);
-             }
+    public Produto buscaMenorEstoque() {
+        if(produto.isEmpty()){
+            return null;
+        }
 
-         }return semEstoque;
-     }
+        Produto menorEstoque = produto.get(0);
+        if(menorEstoque.getEstoque() == 0){
+            return menorEstoque;
+        }
 
+        for (Produto p : produto) {
+            if (menorEstoque.getEstoque() > p.getEstoque()) {
+                menorEstoque = p;
+                if (menorEstoque.getEstoque() == 0) {
+                    return menorEstoque;
+                }
+            }
+        }
+        return menorEstoque;
+    } //for-each
 
- }
+    public ArrayList<Produto> buscaProdutosSemEstoque() {
+        ArrayList<Produto> semEstoque = new ArrayList<>();
+        for(Produto p : produto){
+            if(p.getEstoque() == 0){
+                semEstoque.add(p);
+            }
+        }
+        return semEstoque;
+    }//for-each
+
+    public Produto buscaMaisCaro() {
+        if (produto.isEmpty()) {
+            return null;
+        }
+        Produto maisCaro = produto.get(0);
+        for (Produto p : produto) {
+            if (p.getPreco() > maisCaro.getPreco()) {
+                maisCaro = p;
+            }
+        }
+        return maisCaro;
+
+    }//for-each
+
+    public Produto buscarProduto(String nome) {
+        for (Produto p : produto) {
+            if (p.getNome().equals(nome)) {
+                return p;
+            }
+        }
+        return null;
+    }//for-each
+}

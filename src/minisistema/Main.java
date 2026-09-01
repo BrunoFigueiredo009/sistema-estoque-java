@@ -59,10 +59,14 @@ public class Main {
                         if (!verificaSubMenu) {
                             System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
                             continue;
-                        } else if (op == 0) {
+                        }
+
+                        else if (op == 0) {
                             System.out.println("\n\nVoltando ao menu\n\n");
                             break;
-                        } else if (op == 1) {
+                        }
+
+                        else if (op == 1) {
                             System.out.println("\n\n====== CADASTRO DE ALIMENTO ======");
                             scanner.nextLine();
                             System.out.println("Entre com o nome do alimento");
@@ -142,7 +146,7 @@ public class Main {
                     } while (op != 0);
 
 
-                } // Cadastrar Produtos
+                } //Cadastrar Produtos
 
                 else if (menuOp == 2) {
 
@@ -160,12 +164,18 @@ public class Main {
                         if (!verificaSubMenu) {
                             System.out.println("Numero invalido");
                             continue;
-                        } else if (op == 0) {
+                        }
+
+                        else if (op == 0) {
                             break;
-                        } else if (sistema.listaVazia()) {
+                        }
+
+                        else if (sistema.listaVazia()) {
                             System.out.println("Nenhum produto cadastrado, cadastre para visualizar");
                             break;
-                        } else if (op == 1) {
+                        }
+
+                        else if (op == 1) {
                             System.out.println("====== PRODUTOS ACIMA DO VALOR ======");
                             System.out.println("Entre com o valor do produto que deseja ver");
                             double valorProdutoAcima = scanner.nextDouble();
@@ -215,10 +225,14 @@ public class Main {
                         if (!verificaSubMenu) {
                             System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
                             continue;
-                        } else if (op == 0) {
+                        }
+
+                        else if (op == 0) {
                             System.out.println("\n\nVoltando ao menu\n\n");
                             break;
-                        } else if (op == 1) {
+                        }
+
+                        else if (op == 1) {
                             if (sistema.listaVazia()) {
                                 System.out.println("Lista Vazia");
                                 break;
@@ -318,9 +332,10 @@ public class Main {
                                 3 - Produtos com estoque baixo
                                 4 - Soma dos valores do estoque
                                 5 - Soma do estoque geral
+                                6 - Produto com menor estoque
                                 0 - Voltar""");
                         op = scanner.nextInt();
-                        verificaSubMenu = sistema.verificaSubMenu(op, 5);
+                        verificaSubMenu = sistema.verificaSubMenu(op, 6);
 
                         if (!verificaSubMenu) {
                             System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
@@ -366,8 +381,14 @@ public class Main {
 
                         else if (op == 3) {
                             System.out.println("====== LISTAR ESTOQUE BAIXO ======");
-                            sistema.listarEstoqueBaixo();
-                        }//Produto com estoque baixo
+
+                            int quantidadeEstoqueBaixo = sistema.quantidadeEstoqueBaixa();
+                            if(quantidadeEstoqueBaixo == 0){
+                                System.out.println("Não existe produtos com estoque baixo");
+                            }else{
+                                System.out.println("Quantidade de produtos com estoque baixo: "+quantidadeEstoqueBaixo);
+                            }
+                        }//Produtos com estoque baixo
 
                         else if (op == 4) {
                             System.out.println("====== CALCULAR O VALOR TOTAL DO ESTOQUE ======");
@@ -383,8 +404,15 @@ public class Main {
 
                         }//Estoque Total
 
+                        else if (op == 6) {
+                            System.out.println("====== MENOR ESTOQUE ======");
+
+                            System.out.println("Nome: "+sistema.buscaMenorEstoque().getNome()+" - Estoque: "+sistema.buscaMenorEstoque().getEstoque());
+
+                        }
+
                     } while (op != 0);
-                }
+                }//Estoque
             }
         } while (menuOp != 0);
     }

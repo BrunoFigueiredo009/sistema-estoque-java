@@ -234,6 +234,20 @@ public class SistemaProdutos {
         return data;
     }
 
+    public double lerDoubleValido(Scanner scanner){
+        double a = 0;
+        boolean valida = false;
+        do {
+            try {
+                a = scanner.nextDouble();
+                valida = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Número invalido");
+                scanner.nextLine();
+            }
+        }while(!valida);
+        return a;
+    }
 
 
 }

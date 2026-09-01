@@ -74,13 +74,13 @@ public class Main {
                             nome = scanner.nextLine();
 
                             System.out.println("Entre com o preco");
-                            valor = scanner.nextDouble();
-
+                            valor = sistema.lerDoubleValido(scanner);
                             verificaNumero = sistema.numeroMaiorZero(valor);
+
 
                             while (!verificaNumero) {
                                 System.out.println("Entre com um preço válido");
-                                valor = scanner.nextDouble();
+                                valor = sistema.lerDoubleValido(scanner);
                                 verificaNumero = sistema.numeroMaiorZero(valor);
                             }
 
@@ -113,13 +113,13 @@ public class Main {
                             nome = scanner.nextLine();
 
                             System.out.println("Entre com o preco");
-                            valor = scanner.nextDouble();
+                            valor = sistema.lerDoubleValido(scanner);
 
                             verificaNumero = sistema.numeroMaiorZero(valor);
 
                             while (!verificaNumero) {
                                 System.out.println("Entre com um preço válido");
-                                valor = scanner.nextDouble();
+                                valor = sistema.lerDoubleValido(scanner);
                                 verificaNumero = sistema.numeroMaiorZero(valor);
                             }
 
@@ -289,7 +289,7 @@ public class Main {
                             String nome = scanner.nextLine();
 
                             System.out.println("Qual o novo preco?");
-                            double novoPreco = scanner.nextDouble();
+                            double novoPreco = sistema.lerDoubleValido(scanner);
 
                             boolean consegui = sistema.atualizaPreco(nome, novoPreco);
 

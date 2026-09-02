@@ -16,6 +16,7 @@ public class Main {
         System.out.println("3 - VENDAS");
         System.out.println("4 - EDITAR PRODUTOS");
         System.out.println("5 - ESTOQUE");
+        System.out.println("6 - HISTORICO");
         System.out.println("0 - Sair\n\n");
     }
 
@@ -28,6 +29,8 @@ public class Main {
 
     public static void main(String[] args) {
         SistemaProdutos sistema = new SistemaProdutos();
+
+
         Scanner scanner = new Scanner(System.in);
         boolean verificaSubMenu;
         boolean verificaNumero;
@@ -38,7 +41,7 @@ public class Main {
 
             menuOp = sistema.lerInteiroValido(scanner);
 
-            boolean verificaMenu = sistema.verificaNumeroMenu(menuOp, 5);
+            boolean verificaMenu = sistema.verificaNumeroMenu(menuOp, 6);
 
             if (!verificaMenu) {
                 System.out.println("Entre com uma opçao válida");
@@ -199,7 +202,10 @@ public class Main {
 
                             System.out.println("\n\n====== LISTA DE PRODUTOS CADASTRADOS ======");
                             System.out.println("Produtos cadastrados:");
-                            System.out.println(sistema.produtosCadastrados());
+                            for(Produto p : sistema.produtosCadastrados()){
+                                System.out.println(sistema.produtosCadastrados());
+                            }
+
                         } //Produtos Cadastrados
 
                     } while (op != 0);
@@ -247,7 +253,7 @@ public class Main {
                             try {
                                 vendeu = sistema.venderProduto(busca, quantVendido);
 
-                            }catch (EstoqueInsuficienteException e){
+                            } catch (EstoqueInsuficienteException e) {
                                 System.out.println(e.getMessage());
                                 vendeu = false;
 
@@ -409,6 +415,38 @@ public class Main {
 
                     } while (op != 0);
                 }//Estoque
+
+                else if (menuOp == 6) {
+
+
+                    do {
+                        System.out.println("""
+                                ====== HISTORICO ======
+                                1 - Vendas Realizadas
+                                0 - Sair""");
+                        op = sistema.lerInteiroValido(scanner);
+                        verificaSubMenu = sistema.verificaNumeroMenu(op, 1);
+                        if (!verificaSubMenu) {
+                            System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
+                            continue;
+                        } else if (op == 0) {
+                            System.out.println("\n\nVoltando ao menu\n\n");
+                            break;
+                        } else if (sistema.movimetacoesVazia()) {
+                            System.out.println("lista vazia, cadastre para visualizar\nVoltando ao menu");
+                            break;
+                        }
+                        if (op == 1) {
+                            System.out.println("====== HISTORICO DE VENDAS REALIZADAS ======");
+                            for(Movimentacao m : sistema.buscarHistoricoMovimentacoes()){
+                                System.out.println(m);
+                            }
+
+                        }
+
+
+                    } while (op != 0);
+                }//Historico
             }
         } while (menuOp != 0);
     }

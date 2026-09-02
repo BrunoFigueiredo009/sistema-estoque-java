@@ -3,6 +3,7 @@ package minisistema;
 import java.text.DateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -12,8 +13,6 @@ public class SistemaProdutos {
 
     public boolean numeroMaiorZero(double valor) {
         return valor > 0;
-
-
     }
 
     public boolean verificaSubMenu(int valor, int maximo) {
@@ -72,11 +71,16 @@ public class SistemaProdutos {
 
     public boolean venderProduto(String nome, int quantidade) {
         Produto encontrado = buscarProduto(nome);
-
+        boolean resultadoVenda;
         if (encontrado instanceof Vendavel v) {
             //Ja confirmei que a encontrado é vendavel. Agora quero trata-la como vendavel
+           resultadoVenda = v.vender(quantidade);
+           if(resultadoVenda){
+             Movimentacao m = new Movimentacao(encontrado, quantidade,LocalDateTime.now(), TipoMovimentacao.VENDA);
+             movimentacoes.add(m);
 
-            return v.vender(quantidade);
+           }
+            return resultadoVenda;
         }
 
         return false;
@@ -248,6 +252,17 @@ public class SistemaProdutos {
         }while(!valida);
         return a;
     }
+
+    private List<Movimentacao> movimentacoes = new ArrayList<Movimentacao>();
+
+    public List<Movimentacao> buscarHistoricoMovimentacoes(){
+
+        return movimentacoes;
+    }
+    public boolean movimetacoesVazia(){
+        return movimentacoes.isEmpty();
+    }
+
 
 
 }

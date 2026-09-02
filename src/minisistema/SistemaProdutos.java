@@ -36,7 +36,6 @@ public class SistemaProdutos {
         return produto.isEmpty();
     }
 
-
     public List<Produto> produtosCadastrados() {
         return produto;
     }
@@ -69,22 +68,41 @@ public class SistemaProdutos {
         return contEstoque;
     }//for-each
 
+    public boolean aumentaEstoque(String nome, int quantidade) {
+
+        Produto encontrado = buscarProduto(nome);
+
+        boolean resultadoAumentaEstoque;
+
+        if (encontrado == null) {
+            return false;
+        }
+
+        resultadoAumentaEstoque = encontrado.aumentaEstoque(quantidade);
+
+        if (resultadoAumentaEstoque) {
+            Movimentacao m = new Movimentacao(encontrado, quantidade, LocalDateTime.now(), TipoMovimentacao.ENTRADA);
+            movimentacoes.add(m);
+        }
+
+        return resultadoAumentaEstoque;
+    }
+
     public boolean venderProduto(String nome, int quantidade) {
         Produto encontrado = buscarProduto(nome);
         boolean resultadoVenda;
         if (encontrado instanceof Vendavel v) {
             //Ja confirmei que a encontrado é vendavel. Agora quero trata-la como vendavel
-           resultadoVenda = v.vender(quantidade);
-           if(resultadoVenda){
-             Movimentacao m = new Movimentacao(encontrado, quantidade,LocalDateTime.now(), TipoMovimentacao.VENDA);
-             movimentacoes.add(m);
+            resultadoVenda = v.vender(quantidade);
+            if (resultadoVenda) {
+                Movimentacao m = new Movimentacao(encontrado, quantidade, LocalDateTime.now(), TipoMovimentacao.VENDA);
+                movimentacoes.add(m);
 
-           }
+            }
             return resultadoVenda;
         }
 
         return false;
-
     }
 
     public boolean removerProdutos(String nome) {
@@ -209,7 +227,7 @@ public class SistemaProdutos {
         int a = 0;
         do {
             try {
-                 a = scanner.nextInt();
+                a = scanner.nextInt();
                 verificaNumero = true;
             } catch (InputMismatchException e) {
                 System.out.println("Entre com um número válido");
@@ -219,26 +237,26 @@ public class SistemaProdutos {
         return a;
     }
 
-    public LocalDate dataProdutoValida(Scanner scanner){
+    public LocalDate dataProdutoValida(Scanner scanner) {
         boolean dataValida = false;
         LocalDate data = null;
         String dataString;
-        do{
-            try{
+        do {
+            try {
                 java.time.format.DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 dataString = scanner.nextLine();
-                 data = LocalDate.parse(dataString,formato);
+                data = LocalDate.parse(dataString, formato);
                 dataValida = true;
-            }catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 System.out.println("Entre com uma data valida: dd/mm/yyyy");
 
             }
-        }while(!dataValida);
+        } while (!dataValida);
         return data;
     }
 
-    public double lerDoubleValido(Scanner scanner){
+    public double lerDoubleValido(Scanner scanner) {
         double a = 0;
         boolean valida = false;
         do {
@@ -249,20 +267,45 @@ public class SistemaProdutos {
                 System.out.println("Número invalido");
                 scanner.nextLine();
             }
-        }while(!valida);
+        } while (!valida);
         return a;
     }
 
     private List<Movimentacao> movimentacoes = new ArrayList<Movimentacao>();
 
-    public List<Movimentacao> buscarHistoricoMovimentacoes(){
+    public List<Movimentacao> buscarHistoricoMovimentacoes() {
 
         return movimentacoes;
     }
-    public boolean movimetacoesVazia(){
+
+    public boolean movimetacoesVazia() {
         return movimentacoes.isEmpty();
     }
 
+    public List<Movimentacao> buscarHistoricoVendas() {
 
+        List<Movimentacao> vendas = new ArrayList<>();
+
+        for (Movimentacao m : movimentacoes) {
+            if (m.getTipo() == TipoMovimentacao.VENDA) {
+                vendas.add(m);
+            }
+        }
+
+        return vendas;
+    }
+
+    public List<Movimentacao> buscarHistoricoEntradas() {
+
+        List<Movimentacao> entradas = new ArrayList<>();
+
+        for (Movimentacao m : movimentacoes) {
+            if (m.getTipo() == TipoMovimentacao.ENTRADA) {
+                entradas.add(m);
+            }
+        }
+
+        return entradas;
+    }
 
 }

@@ -32,9 +32,9 @@ public abstract class Produto {
         return false;
     }
 
-    public boolean aumentaEstoque(int a) {
-        if (a > 0) {
-            this.estoque += a;
+    public boolean aumentaEstoque(int quantidade) {
+        if (quantidade > 0) {
+            this.estoque += quantidade;
             return true;
 
         }

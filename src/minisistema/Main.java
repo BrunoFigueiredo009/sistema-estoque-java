@@ -202,8 +202,8 @@ public class Main {
 
                             System.out.println("\n\n====== LISTA DE PRODUTOS CADASTRADOS ======");
                             System.out.println("Produtos cadastrados:");
-                            for(Produto p : sistema.produtosCadastrados()){
-                                System.out.println(sistema.produtosCadastrados());
+                            for (Produto p : sistema.produtosCadastrados()) {
+                                System.out.println(p);
                             }
 
                         } //Produtos Cadastrados
@@ -329,7 +329,7 @@ public class Main {
                     do {
                         System.out.println("""
                                 ====== ESTOQUE ======
-                                1 - Adiciona estoque                            
+                                1 - Entrada de estoque                            
                                 2 - Produtos com estoques Zerados
                                 3 - Produtos com estoque baixo
                                 4 - Soma dos valores do estoque
@@ -357,9 +357,11 @@ public class Main {
                             busca = scanner.nextLine();
 
                             System.out.println("Digite o valor do estoque para atualizar");
-                            int atualiza = sistema.lerInteiroValido(scanner);
+                            int quantidade = sistema.lerInteiroValido(scanner);
 
-                            boolean alterou = sistema.atualizaEstoque(busca, atualiza);
+                            sistema.aumentaEstoque(busca, quantidade);
+
+                            boolean alterou = sistema.atualizaEstoque(busca, quantidade);
 
                             if (alterou) {
                                 System.out.println("Atualizado com sucesso ");
@@ -422,10 +424,12 @@ public class Main {
                     do {
                         System.out.println("""
                                 ====== HISTORICO ======
-                                1 - Vendas Realizadas
+                                1 - Historico de movimentações
+                                2 - Vendas Realizadas
+                                3 - Entrada de estoques
                                 0 - Sair""");
                         op = sistema.lerInteiroValido(scanner);
-                        verificaSubMenu = sistema.verificaNumeroMenu(op, 1);
+                        verificaSubMenu = sistema.verificaNumeroMenu(op, 3);
                         if (!verificaSubMenu) {
                             System.out.print("\n\nNúmero inválido, entre com um número válido:\n\n");
                             continue;
@@ -436,20 +440,45 @@ public class Main {
                             System.out.println("lista vazia, cadastre para visualizar\nVoltando ao menu");
                             break;
                         }
-                        if (op == 1) {
-                            System.out.println("====== HISTORICO DE VENDAS REALIZADAS ======");
-                            for(Movimentacao m : sistema.buscarHistoricoMovimentacoes()){
+                        if(op == 1){
+                            System.out.println("""
+                                    ====== HISTÓRICO DE MOVIMENTAÇÕES""");
+                            List<Movimentacao> historico = sistema.buscarHistoricoMovimentacoes();
+                            for(Movimentacao m : historico){
                                 System.out.println(m);
                             }
 
                         }
+                        else if (op == 2) {
+                            System.out.println("====== HISTORICO DE VENDAS REALIZADAS ======");
+                            List<Movimentacao> vendas = sistema.buscarHistoricoVendas();
 
+                            if(vendas.isEmpty()){
+                                System.out.println("Nenhuma venda realizada");
+                            }else{
+                                for(Movimentacao m : vendas){
+                                    System.out.println(m);
+                                }
+                            }
 
-                    } while (op != 0);
-                }//Historico
-            }
-        } while (menuOp != 0);
-    }
+                        } else if (op == 3) {
+                            System.out.println("====== ENTRADAS DE ESTOQUE ======");
+
+                            List<Movimentacao> entradas = sistema.buscarHistoricoEntradas();
+                            if (entradas.isEmpty()) {
+                                System.out.println("Nenhuma entrada registrada.");
+                            } else {
+                                for (Movimentacao m : entradas) {
+                                    System.out.println(m);
+                                }
+                            }
+                        }
+
+                } while (op != 0) ;
+            }//Historico
+        }
+    } while(menuOp !=0);
+}
 }
 
 

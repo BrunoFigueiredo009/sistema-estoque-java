@@ -1,22 +1,26 @@
 package minisistema;
 
+import minisistema.dao.ProdutoDAO;
+
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+import minisistema.dao.CategoriaDAO;
+import minisistema.Categoria;
 
 public class Main {
 
     static void menu() {
         System.out.println("\n\n====== SISTEMA DE PRODUTOS ======");
-        System.out.println("1 - CADASTRAR PRODUTO");
-        System.out.println("2 - CONSULTAR PRODUTOS");
+        System.out.println("1 - CADASTRAR");
+        System.out.println("2 - CONSULTAR");
         System.out.println("3 - VENDAS");
-        System.out.println("4 - EDITAR PRODUTOS");
+        System.out.println("4 - EDITAR ");
         System.out.println("5 - ESTOQUE");
         System.out.println("6 - HISTORICO");
+
         System.out.println("0 - Sair\n\n");
     }
 
@@ -27,7 +31,7 @@ public class Main {
         System.out.println("0 - Voltar");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         SistemaProdutos sistema = new SistemaProdutos();
 
 
@@ -37,6 +41,8 @@ public class Main {
         int menuOp = 0;
 
         do {
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+
             menu();
 
             menuOp = sistema.lerInteiroValido(scanner);
@@ -141,8 +147,30 @@ public class Main {
                             scanner.nextLine();
                             String garantia = scanner.nextLine();
 
+                            List<Categoria> categorias = categoriaDAO.listarTodas();
+
+                            System.out.println("====== ESCOLHA UMA CATEGORIA ======");
+
+                            for (Categoria c : categorias) {
+                                System.out.println(c.getId() + " - " + c.getNome());
+                            }
+
+                            System.out.println("Digite o ID da categoria:");
+                            int idCategoria = sistema.lerInteiroValido(scanner);
+
+                            Categoria categoria = categoriaDAO.buscarPorId(idCategoria);
+
+                            while (categoria == null) {
+                                System.out.println("Entre com uma categoria valida");
+                                idCategoria = sistema.lerInteiroValido(scanner);
+                                categoria = categoriaDAO.buscarPorId(idCategoria);
+                            }
+
+
                             Eletronico eletronico = new Eletronico(nome, valor, estoque, garantia);
                             sistema.cadastraProduto(eletronico);
+                            eletronico.setCategoria(categoria);
+
                             System.out.println("\n\nCadastrado com sucesso\n\n");
                         }//Cadastro de Eletronico
 
@@ -154,15 +182,16 @@ public class Main {
 
                     do {
                         System.out.println("""
-                                ====== CONSULTAR PRODUTOS ======
+                                ====== CONSULTAR ======
                                 1 - Consultar por Preço
                                 2 - Consultar o mais caro
                                 3 - Consultar produtos vencidos
                                 4 - Consultar todos produtos
+                                5 - Listar categorias
                                 0 - Sair""");
 
                         op = sistema.lerInteiroValido(scanner);
-                        verificaSubMenu = sistema.verificaSubMenu(op, 4);
+                        verificaSubMenu = sistema.verificaSubMenu(op, 5);
 
                         if (!verificaSubMenu) {
                             System.out.println("Numero invalido");
@@ -204,6 +233,13 @@ public class Main {
                             System.out.println("Produtos cadastrados:");
                             for (Produto p : sistema.produtosCadastrados()) {
                                 System.out.println(p);
+                            }
+
+                        } else if (op == 5) {
+                            List<Categoria> categorias = categoriaDAO.listarTodas();
+
+                            for (Categoria c : categorias) {
+                                System.out.println(c.getId() + " - " + c.getNome());
                             }
 
                         } //Produtos Cadastrados
@@ -440,23 +476,22 @@ public class Main {
                             System.out.println("lista vazia, cadastre para visualizar\nVoltando ao menu");
                             break;
                         }
-                        if(op == 1){
+                        if (op == 1) {
                             System.out.println("""
                                     ====== HISTÓRICO DE MOVIMENTAÇÕES""");
                             List<Movimentacao> historico = sistema.buscarHistoricoMovimentacoes();
-                            for(Movimentacao m : historico){
+                            for (Movimentacao m : historico) {
                                 System.out.println(m);
                             }
 
-                        }
-                        else if (op == 2) {
+                        } else if (op == 2) {
                             System.out.println("====== HISTORICO DE VENDAS REALIZADAS ======");
                             List<Movimentacao> vendas = sistema.buscarHistoricoVendas();
 
-                            if(vendas.isEmpty()){
+                            if (vendas.isEmpty()) {
                                 System.out.println("Nenhuma venda realizada");
-                            }else{
-                                for(Movimentacao m : vendas){
+                            } else {
+                                for (Movimentacao m : vendas) {
                                     System.out.println(m);
                                 }
                             }
@@ -474,11 +509,11 @@ public class Main {
                             }
                         }
 
-                } while (op != 0) ;
-            }//Historico
-        }
-    } while(menuOp !=0);
-}
+                    } while (op != 0);
+                }//Historico
+            }
+        } while (menuOp != 0);
+    }
 }
 
 

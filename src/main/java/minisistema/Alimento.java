@@ -1,6 +1,5 @@
 package minisistema;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 public class Alimento extends Produto implements Vendavel {

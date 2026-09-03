@@ -5,6 +5,7 @@ public abstract class Produto {
     private String nome;
     private double preco;
     private int estoque;
+    private Categoria categoria;
 
 
     public Produto(String nome, double preco, int estoque) {
@@ -60,6 +61,14 @@ public abstract class Produto {
         }
         return false;
 
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String toString() {
